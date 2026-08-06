@@ -8,9 +8,8 @@
 
 <br>
 
-### <span style="color:#FF4500; text-shadow: 0 0 10px #FF4500, 0 0 20px #FF4500;">Control • Exploit • Dominate</span><br>
-### <span style="color:#00FF7F; text-shadow: 0 0 10px #00FF7F, 0 0 20px #00FF7F;">Telegram Session Controller Bot</span>
-
+### <span style="color:#FF4500; font-size:28px; text-shadow: 0 0 15px #FF4500, 0 0 30px #FF4500;">⛓️ Control • Exploit • Dominate ⛓️</span><br>
+### <span style="color:#00FF7F; font-size:24px; text-shadow: 0 0 15px #00FF7F, 0 0 30px #00FF7F;">⚡ Telegram Session Controller Bot ⚡</span>
 <br>
 
 [![Maintained](https://img.shields.io/badge/Maintained%3F-Yes-ff4500?style=for-the-badge&logo=github&logoColor=white)](https://github.com/kurupdevs/SESSIONHACK)
