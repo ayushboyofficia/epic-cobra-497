@@ -1,41 +1,23 @@
-import env
 import asyncio
-from Hack import bot
-from Hack.database import DB
-
-from telethon import events, errors
+from pyrogram import Client, filters
+from pyrogram.types import Message
 
 
-@bot.on(events.NewMessage(pattern=r"/broadcast\s*([\s\S]*)?"))
-async def broadcast(event):
-    if not DB:
-        await event.reply('Add Mongo Url First')
+async def setup(client: Client):
+    client.on_message(filters.command("broadcast", prefixes="/") & filters.me)(broadcast_handler)
+
+
+async def broadcast_handler(client: Client, message: Message):
+    if not message.reply_to_message:
+        await message.edit("Reply to a message to broadcast.")
         return
-    if not (event.sender_id in env.SUDOERS):
-        return
-    text = event.pattern_match.group(1)
-    reply = await event.get_reply_message()
-    if not (text or reply):
-        return await event.reply('Please Give A Text Or Reply To a Message')
-    sent = 0
-    ids = await DB.get_users()
-
-    msg = await event.reply(
-        "**Processing....\nPlease Dont Delete The Replied Message**"
-    ) if reply else await event.reply('**Processing....**')
-    for user in ids:
+    await message.edit("**Broadcasting...**")
+    count = 0
+    async for dialog in client.get_dialogs():
         try:
-            await reply.forward_to(user) if reply else await bot.send_message(
-                user, text)
-            sent += 1
-            await asyncio.sleep(0.8)
-        except errors.rpcerrorlist.FloodWaitError as fwerr:
-            await asyncio.sleep(fwerr.seconds + 5)
+            await message.reply_to_message.copy(dialog.chat.id)
+            count += 1
+            await asyncio.sleep(0.3)
         except Exception:
-            continue
-
-    result = f"**Broadcasted In {len(ids)} Chats **"
-    try:
-        await msg.edit(result)
-    except:
-        await event.reply(result)
+            pass
+    await message.edit(f"**Broadcast complete!** Sent to {count} chats.")

@@ -1,32 +1,34 @@
-from motor.motor_asyncio import AsyncIOMotorClient
+import os
+from pymongo import MongoClient
+
+MONGO_URI = os.getenv("MONGO_URI", "")
+
+client = MongoClient(MONGO_URI) if MONGO_URI else None
+db = client["sessionhack"] if client else None
 
 
-class Mongo:
-    def __init__(self, url):
-        self.mongo = AsyncIOMotorClient(url)
-        self.db = self.mongo.SESSIONDB
-        self.usersdb = self.db.usersdb
+def get_collection(name: str):
+    if db is None:
+        return None
+    return db[name]
 
-    async def get_users(self) -> list:
-        user = self.usersdb.find()
-        if not user:
-            return []
-        user_list = []
-        for user in await user.to_list(length=1000000000):
-            user_list.append(int(user['user_id']))
-        return user_list
-        
-    async def is_user(self, user_id: int) -> bool:
-        user = await self.usersdb.find_one({"user_id": user_id})
-        if not user:
-            return False
-        return True
-    
-    async def add_user(self, user_id: int):
-        try:
-            is_served = await self.is_user(user_id)
-            if is_served:
-                return
-            return await self.usersdb.insert_one({"user_id": user_id})
-        except:
-            pass
+
+def insert(collection: str, data: dict):
+    col = get_collection(collection)
+    if col is not None:
+        return col.insert_one(data)
+    return None
+
+
+def find(collection: str, query: dict):
+    col = get_collection(collection)
+    if col is not None:
+        return list(col.find(query))
+    return []
+
+
+def update(collection: str, query: dict, data: dict):
+    col = get_collection(collection)
+    if col is not None:
+        return col.update_one(query, {"$set": data})
+    return None
