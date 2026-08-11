@@ -15,20 +15,15 @@ app = Client(
     bot_token=BOT_TOKEN
 )
 
-
 async def main():
     """Start the SessionHack bot."""
     setup_logging()
     logger.info("Starting SessionHack...")
-    
     await app.start()
     logger.info("SessionHack is online!")
-    
     await load_plugins(app)
     logger.info("Plugins loaded.")
-    
     await asyncio.Event().wait()
-
 
 if __name__ == "__main__":
     asyncio.run(main())
