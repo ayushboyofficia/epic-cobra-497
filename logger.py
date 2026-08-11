@@ -6,6 +6,7 @@ logging.basicConfig(format='[%(asctime)s - %(levelname)s] - %(name)s : %(message
 
 
 class AsyncioFilter(logging.Filter):
+    """Filter out noisy asyncio task destruction warnings."""
     def filter(self, record):
         if record.levelname == 'ERROR' and "Task was destroyed but it is pending!" in record.msg:
             return False
