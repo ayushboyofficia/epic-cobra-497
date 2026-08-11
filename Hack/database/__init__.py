@@ -1,2 +1,2 @@
 """DB"""
-from .mongo import get_collection,insert,find,update
+from .mongo import col,ins,fnd
