@@ -1,11 +1,11 @@
 # Session Hack Bot
 # Instagram session hijack tool
 
-import asyncio
 import os
 from pyrogram import Client, filters
 from env import API_ID, API_HASH, BOT_TOKEN
 from logger import logger
+# main bot entry point
 
 app = Client(
     "session_hack_bot",
@@ -24,4 +24,5 @@ async def main():
     await asyncio.Event().wait()
 
 if __name__ == "__main__":
+    import asyncio
     app.run(main())
