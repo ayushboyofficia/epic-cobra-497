@@ -1,18 +1,14 @@
-import importlib
+import asyncio
+from env import API_ID,API_HASH,BOT_TOKEN
+from pyrogram import Client
+from Hack import load_plugins
+from logger import setup_logging
 
-from Hack import bot, botname
-from logger import LOGGER
-from Hack.plugins import ALL_MODULES
+async def main():
+ setup_logging()
+ c=Client("hack",api_id=API_ID,api_hash=API_HASH,bot_token=BOT_TOKEN)
+ await c.start();await load_plugins(c)
+ print("SessionHack running!")
+ await asyncio.Event().wait()
 
-
-async def initiate_bot():
-    LOGGER(__name__).info('IMPORTING MODULES')
-    for all_module in ALL_MODULES:
-        importlib.import_module("Hack.plugins." + all_module)
-    LOGGER(__name__).info('MODULES IMPORTED SUCCESSFULLY')
-    await bot.run_until_disconnected()
-
-
-if __name__ == '__main__':
-    bot.loop.run_until_complete(initiate_bot())
-    LOGGER(__name__).info(f'{botname} IS STOPPED')
+if __name__=="__main__":asyncio.run(main())
