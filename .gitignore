@@ -1,3 +1,11 @@
+__pycache__/
+*.py[cod]
+.env
+.venv/
 *.session
 *.session-journal
-__pycache__
+*.db
+.vscode/
+.idea/
+*.log
+.DS_Store
