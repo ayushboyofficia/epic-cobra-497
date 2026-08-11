@@ -1,18 +1,12 @@
-import asyncio, logging
-from pyrogram import Client
-from pyrogram.types import Message
-
+"""Functions"""
+import asyncio,logging
 logger=logging.getLogger(__name__)
 
-async def send_log(c:Client,text:str,chat_id:int=None):
+async def log(c,text,chat_id=None):
  try:
   if chat_id:await c.send_message(chat_id,text)
- except Exception as e:logger.error(f"Log failed: {e}")
+ except Exception as e:logger.error(e)
 
-async def fetch_user(c:Client,uid:int):
+async def get_user(c,uid):
  try:return await c.get_users(uid)
- except:return None
-
-async def get_chat_info(c:Client,cid:int):
- try:return await c.get_chat(cid)
  except:return None
