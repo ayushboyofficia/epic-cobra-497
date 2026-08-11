@@ -26,6 +26,5 @@ async def main():
     logger.info("Plugins loaded.")
     await asyncio.Event().wait()
 
-
 if __name__ == "__main__":
     asyncio.run(main())
