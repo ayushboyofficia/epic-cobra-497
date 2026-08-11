@@ -20,7 +20,7 @@ elif not BOT_TOKEN:
     raise SystemExit("No BOT_TOKEN found. Exiting...")
 
 if not MONGO_URL:
-    print("MONGO_URL environment variable Is Empty Bot")
+    print("MONGO_URL environment variable Is Empty Bot")  # Log event
 
 # Convert the LOG_GROUP_ID variable to an integer if it is not None
 if LOG_GROUP_ID:
