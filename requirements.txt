@@ -1,3 +1,4 @@
-pyrofork>=2.3.0
-environs>=9.0
-
+pyrogram
+tgcrypto
+psutil
+# Session Hack deps
