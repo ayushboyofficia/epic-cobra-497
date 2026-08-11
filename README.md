@@ -1,27 +1,19 @@
-# SESSIONHACK - Telegram Session Generator
+# 🐍 Epic Cobra 497
 
-Generate Telegram session strings easily and securely for your bots and userbots.
+A versatile Telegram bot with multiple features.
 
-## Features
-- 🔐 Secure session generation
-- 🖥️ Web-based interface
-- 🐳 Docker ready
-- ☁️ Deploy to Heroku/Render
-- 📱 Multiple device support
+## Commands
+- /start - Start bot
+- /help - Help menu
+- /ping - Latency check
+- /alive - Status check
+- /laugh - Fun
+- /magic - 8-ball
 
-## Quick Deploy
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+## Setup
+```bash
+pip install -r requirements.txt
+python bot.py
+```
 
-## Usage
-1. Deploy the app to Heroku or Render
-2. Enter your API ID and API Hash
-3. Enter your phone number
-4. Get your session string
-
-## Environment Variables
-- `API_ID` - Your Telegram API ID
-- `API_HASH` - Your Telegram API Hash
-- `BOT_TOKEN` - Your bot token (optional)
-
-## License
-MIT
+Built by [kurupdevs](https://github.com/kurupdevs)
