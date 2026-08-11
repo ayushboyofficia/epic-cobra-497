@@ -1,4 +1,4 @@
-pyrogram
-tgcrypto
-psutil
-# SessionHack deps
+pyrogram>=2.0.0
+tgcrypto>=1.2.0
+python-dotenv
+requests
