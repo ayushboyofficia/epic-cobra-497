@@ -1,4 +1,4 @@
 pyrogram
 tgcrypto
 psutil
-# Session Hack deps
+# SessionHack dependencies
