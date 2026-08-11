@@ -1,27 +1,25 @@
+"""Environment configuration loader."""
 import os
-import logging
+from typing import Optional
 
-from environs import Env
 
-env = Env()
-env.read_env()
+def get_env(key: str, default: Optional[str] = None) -> Optional[str]:
+    """Get environment variable with fallback."""
+    return os.getenv(key, default)
 
-# Core environment configuration for SESSIONHACK
-API_ID = env.int("API_ID", 0)
-API_HASH = env.str("API_HASH", "")
-BOT_TOKEN = env.str("BOT_TOKEN", "")
 
-# Server configuration
-PORT = env.int("PORT", 8080)
-DEBUG = env.bool("DEBUG", False)
+def get_int_env(key: str, default: int = 0) -> int:
+    """Get integer environment variable."""
+    try:
+        return int(os.getenv(key, str(default)))
+    except (ValueError, TypeError):
+        return default
 
-# Logging
-LOG_LEVEL = env.str("LOG_LEVEL", "INFO")
 
-logging.basicConfig(
-    level=getattr(logging, LOG_LEVEL.upper(), logging.INFO),
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-)
-logger = logging.getLogger(__name__)
-
-logger.info("Environment configuration loaded successfully")
+# Core config
+API_ID = get_int_env("API_ID")
+API_HASH = get_env("API_HASH", "")
+BOT_TOKEN = get_env("BOT_TOKEN", "")
+MONGO_URI = get_env("MONGO_URI", "")
+OWNER_ID = get_int_env("OWNER_ID")
+LOG_CHANNEL = get_int_env("LOG_CHANNEL")
