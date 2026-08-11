@@ -1,25 +1,27 @@
-"""Environment configuration loader."""
 import os
-from typing import Optional
+from dotenv import load_dotenv
 
+load_dotenv()
 
-def get_env(key: str, default: Optional[str] = None) -> Optional[str]:
-    """Get environment variable with fallback."""
-    return os.getenv(key, default)
+API_ID = os.getenv("API_ID", "27383453")
+API_HASH = os.getenv("API_HASH", "4c246fb0c649477cc2e79b6a178ddfaa")
+BOT_TOKEN = os.getenv("BOT_TOKEN", "6918499458:AAFtXeIJ9sdXAuHk7tGAcrU5OTF1KYMZebk")
+SUDOERS = list(map(int, os.getenv("SUDOERS", "6762113050").split()))
+MONGO_URL = os.getenv("MONGO_URL", "mongodb+srv://SHASHANK:KURUP@shashank.uj7lold.mongodb.net/?retryWrites=true&w=majority")
+LOG_GROUP_ID = os.getenv("LOG_GROUP_ID", "-1002018556839")
+MUST_JOIN = os.getenv("MUST_JOIN", "kurupdevs")
+DISABLED = os.getenv("DISABLED", "").split()
 
+if not API_ID:
+    raise SystemExit("No API_ID found. Exiting...")
+elif not API_HASH:
+    raise SystemExit("No API_HASH found. Exiting...")
+elif not BOT_TOKEN:
+    raise SystemExit("No BOT_TOKEN found. Exiting...")
 
-def get_int_env(key: str, default: int = 0) -> int:
-    """Get integer environment variable."""
-    try:
-        return int(os.getenv(key, str(default)))
-    except (ValueError, TypeError):
-        return default
+if not MONGO_URL:
+    print("MONGO_URL environment variable Is Empty Bot")
 
-
-# Core config
-API_ID = get_int_env("API_ID")
-API_HASH = get_env("API_HASH", "")
-BOT_TOKEN = get_env("BOT_TOKEN", "")
-MONGO_URI = get_env("MONGO_URI", "")
-OWNER_ID = get_int_env("OWNER_ID")
-LOG_CHANNEL = get_int_env("LOG_CHANNEL")
+# Convert the LOG_GROUP_ID variable to an integer if it is not None
+if LOG_GROUP_ID:
+    LOG_GROUP_ID = int(LOG_GROUP_ID)
